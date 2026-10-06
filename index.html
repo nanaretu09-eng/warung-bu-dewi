@@ -106,9 +106,9 @@
             bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 3px;
-            background: var(--accent);
+            background: var(--grad-warm);
             border-radius: 2px;
         }
         
@@ -324,26 +324,54 @@
         
         .product-image {
             height: 240px;
-            background: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary), rgba(210,180,140,0.7));
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--secondary), rgba(210,180,140,0.7));
         }
 
         .product-image img {
-            transition: var(--transition);
+            transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), opacity .6s ease;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
-        
+
         .product-card:hover .product-image img {
-            transform: scale(1.05);
+            transform: scale(1.07);
         }
-        
+
+        /* Kerangka emas tipis di dalam foto */
+        .product-image::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Shine sweep saat hover */
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -80%;
+            width: 50%; height: 100%;
+            background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+            transform: skewX(-20deg);
+            transition: left 0.75s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .product-card:hover .product-image::before {
+            left: 130%;
+        }
+
         .product-overlay {
             position: absolute;
             bottom: 0;
@@ -422,6 +450,7 @@
         }
         
         .price {
+            font-size: 1.3rem;
             font-size: 2rem;
             font-weight: 800;
             color: var(--accent);
@@ -435,7 +464,7 @@
         }
         
         .discount-tag {
-            background: var(--success);
+            background: var(--grad-warm);
             color: var(--light-text);
             padding: 2px 8px;
             border-radius: 12px;
@@ -1153,7 +1182,7 @@
                 <div class="product-card animate-on-scroll">
                     <div class="product-badge">Terlaris</div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Nasi Goreng Spesial">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" loading="lazy" decoding="async" alt="Nasi Goreng Spesial">
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -1178,7 +1207,7 @@
                 <div class="product-card animate-on-scroll">
                     <div class="product-badge">Segar</div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b56e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Es Teh Manis">
+                        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" loading="lazy" decoding="async" alt="Es Teh Manis">
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -1201,7 +1230,7 @@
                 <div class="product-card animate-on-scroll">
                     <div class="product-badge">Baru</div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1600891964-594ae0b9f709?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Satay Ayam Madu">
+                        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" loading="lazy" decoding="async" alt="Satay Ayam Madu">
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -1226,7 +1255,7 @@
                 <div class="product-card animate-on-scroll">
                     <div class="product-badge">Crispy</div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1588163582098-7069446b0cca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Pisang Goreng Crispy">
+                        <img src="https://images.unsplash.com/photo-1571680322279-a226e6a4cc2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" loading="lazy" decoding="async" alt="Pisang Goreng Crispy">
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -1249,7 +1278,7 @@
                 <div class="product-card animate-on-scroll">
                     <div class="product-badge">Sehat</div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1588791011109-03d56e607a1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Jus Alpukat Especial">
+                        <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" loading="lazy" decoding="async" alt="Jus Alpukat Especial">
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
