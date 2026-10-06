@@ -1065,6 +1065,16 @@
 
         .floating-wa svg { flex-shrink: 0; }
 
+        /* Sembunyikan floating WA saat form pesan terlihat (CTA form sudah ada) */
+        .floating-wa.hidden-at-order {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+        .floating-wa.hidden-at-order {
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
         /* Pulse ring halus agar menarik perhatian */
         @keyframes wa-pulse {
             0% { box-shadow: 0 6px 18px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.45); }
@@ -1152,6 +1162,7 @@
             box-shadow: var(--glow);
         }
         .order-form textarea { resize: vertical; min-height: 64px; }
+        @media (max-width: 640px) { .order-form textarea { resize: none; } }
         .order-submit {
             width: 100%;
             justify-content: center;
@@ -1488,6 +1499,21 @@
         var w = window.open(waUrl, '_blank');
         if (!w) window.location.href = waUrl; // popup diblokir → buka di tab sama
     });
+    });
+    </script>
+
+    <script>
+    // Floating WA disembunyikan saat form pesan terlihat (hindari bentrok dgn tombol kirim)
+    document.addEventListener('DOMContentLoaded', function() {
+        var waBtn = document.querySelector('.floating-wa');
+        var orderSec = document.getElementById('pesan');
+        if (waBtn && orderSec && 'IntersectionObserver' in window) {
+            new IntersectionObserver(function(entries) {
+                entries.forEach(function(en) {
+                    waBtn.classList.toggle('hidden-at-order', en.isIntersecting);
+                });
+            }, { threshold: 0.15 }).observe(orderSec);
+        }
     });
     </script>
 
